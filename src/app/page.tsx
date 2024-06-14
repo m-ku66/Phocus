@@ -1,7 +1,7 @@
 export default function Home() {
   return (
     <>
-      <div className="container max-w-full h-screen flex flex-col px-8 bg-slate-200">
+      <div className="container max-w-full h-screen flex flex-col px-8 bg-transparent">
         Hello world. This is the home page.
       </div>
     </>

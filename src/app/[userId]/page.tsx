@@ -3,12 +3,18 @@ import { doc, getDoc, getFirestore } from "firebase/firestore";
 import React, { useEffect, useState } from "react";
 import app from "../shared/firebaseConfig";
 import UserInfo from "../components/UserInfo";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation";
+
+interface UserData {
+  email: string;
+  userImage: string;
+  userName: string;
+}
 
 const Profile = ({ params }: { params: { userId: string } }) => {
   const db = getFirestore(app);
   const userId = params?.userId;
-  const [userData, setUserData] = useState<Record<string, any> | null>(null); // setting inital state for an object that houses strings
+  const [userData, setUserData] = useState<UserData | null>(null); // setting initial state for an object that houses strings
   const router = useRouter();
 
   useEffect(() => {
@@ -23,7 +29,8 @@ const Profile = ({ params }: { params: { userId: string } }) => {
       const docSnap = await getDoc(docRef);
 
       if (docSnap.exists()) {
-        setUserData(docSnap.data());
+        const data = docSnap.data() as UserData; // Type assertion
+        setUserData(data);
       } else {
         router.push("/");
       }
@@ -34,11 +41,8 @@ const Profile = ({ params }: { params: { userId: string } }) => {
   };
 
   return (
-    <div className="container max-w-full h-screen flex flex-col px-8 items-center bg-slate-200">
+    <div className="container max-w-full h-screen flex flex-col px-8 items-center bg-transparent">
       {userData ? <UserInfo userData={userData} /> : "Loading..."}
-      {`Hello there, ${
-        userId ? userId.replace("%40gmail.com", "") : "anonymous"
-      }!`}
     </div>
   );
 };
