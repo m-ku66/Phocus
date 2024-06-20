@@ -13,7 +13,7 @@ const UserInfo = (props: UserDataProps) => {
   const { userData } = props;
   console.log("Data passed successfully: ", userData);
   return (
-    <div className="mt-[20%] md:mt-[5%] flex flex-col gap-1 items-center">
+    <div className="mt-[20%] md:mt-[5%] mb-[20%] md:mb-[5%] flex flex-col gap-1 items-center">
       <div className="rounded-full w-fit h-fit p-2 bg-gray-300 mb-[10%]">
         <Image
           className="rounded-full"

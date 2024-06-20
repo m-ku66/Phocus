@@ -40,14 +40,19 @@ const Header = () => {
   function handleProfileMenu() {
     if (profileMenuState === "hidden") {
       setprofileMenuState(
-        "duration-500 absolute z-[10] right-[1%] top-[110%] w-fit h-fit bg-white"
+        "duration-500 absolute z-[10] right-[1%] top-[110%] w-fit h-fit bg-white drop-shadow-md"
       );
     } else if (
       profileMenuState ===
-      "duration-500 absolute z-[10] right-[1%] top-[110%] w-fit h-fit bg-white"
+      "duration-500 absolute z-[10] right-[1%] top-[110%] w-fit h-fit bg-white drop-shadow-md"
     ) {
       setprofileMenuState("hidden");
     }
+  }
+
+  function handleUnAuthCreate() {
+    alert("you must be logged in to make a photo!");
+    signIn();
   }
 
   return (
@@ -58,6 +63,7 @@ const Header = () => {
         alt="site logo"
         width={36}
         height={36}
+        onClick={() => router.push("/")}
         className="m-1 cursor-pointer rounded-full hover:bg-gray-300 duration-150"
       />
 
@@ -68,7 +74,12 @@ const Header = () => {
       >
         Home
       </button>
-      <button className="text-gray-500 hover:text-black rounded-full px-4 py-1 font-semibold duration-150">
+      <button
+        onClick={() =>
+          session?.user ? router.push("/pin-builder") : handleUnAuthCreate()
+        }
+        className="text-gray-500 hover:text-black rounded-full px-4 py-1 font-semibold duration-150"
+      >
         Create
       </button>
 
