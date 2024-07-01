@@ -7,7 +7,7 @@ import app from "../shared/firebaseConfig";
 import { useRouter } from "next/navigation";
 import { doc, getFirestore, setDoc } from "firebase/firestore";
 
-const pinBuilder = () => {
+const PinBuilder = () => {
   const { data: session } = useSession();
   const [title, settitle] = useState("");
   const [description, setdescription] = useState("");
@@ -107,4 +107,4 @@ const pinBuilder = () => {
   );
 };
 
-export default pinBuilder;
+export default PinBuilder;
